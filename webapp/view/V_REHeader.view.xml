@@ -1,0 +1,129 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:u="sap.ui" controllerName="DI_Warehouse_Replenishment.controller.V_REHeader" displayBlock="true">
+	<App>
+		<pages>
+			<Page title="DI Warehouse Replenishment">
+				<content>
+					<HBox width="100%" id="__hbox4" binding="{GETPLANT>/S_T001WSet('03')}">
+							<VBox xmlns="sap.m" width="20%" direction="Column" id="__vbox0">
+								<Label text="Site :" design="Bold"/>
+								<Label text="User :" design="Bold"/>
+								<Label text="Date :" design="Bold"/>
+								<Label id="__input7" design="Bold"/>
+								<Button text="Confirm" width="90px" id="__button0" press="showSelected" type="Emphasized"/>
+							</VBox>
+							<VBox width="30%" direction="Column" id="__vbox2">
+								<Label width="100%" id="site" text="{GETPLANT>EPlant}"/>
+								<Label width="100%" id="user" text="{GETPLANT>EUsername}"/>
+								<Label width="100%" id="currentDate"/>
+								<Label/>
+								<Button text="Refresh" width="100px" id="__button1" press="RefreshTable" type="Emphasized" enabled="false"/>
+							</VBox>
+							<VBox width="30%" direction="Column" id="__vbox1">
+								<Label id="__input0" text="Warehouse Nr:" design="Bold"/>
+								<Label id="__input5" text="Last refresh :" design="Bold"/>
+								<Label id="__input11" text="Storage Type :" design="Bold"/>
+							</VBox>
+							<VBox width="25%" direction="Column" id="__vbox3">
+								<Label id="warehouseNumber" text="{GETPLANT>DC}"/>
+								<Label id="lastRefresh"/>
+								<Select id="oSelect" maxWidth="300rem" forceSelection="false" change="SelectStorageType">
+									<core:Item text="DYN"/>
+									<core:Item text="PAL"/>
+									<core:Item text="REP"/>
+									<core:Item text="PAH"/>
+									<core:Item text="CHA"/>
+								</Select>
+							</VBox>
+							<VBox width="50%" direction="Column" id="__vbox4">
+							</VBox>
+					</HBox>
+					<HBox width="100%" id="tableHeaderHBox" visible="false">
+						<Table showNoData="false">
+							<columns>
+								<Column>
+									<header><Label text="Ean (EA)" id="__label2"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Description"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Sales Unit"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Qty OD EA"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Qty TO EA"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Delta (EA)"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Priority"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Qty Picked (EA)"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Stock Picking (EA)"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Picking Stock Coverage"/></header>
+								</Column>
+								<Column>
+									<header><Label text="Stock PAS (EA)"/></header>
+								</Column>
+								<Column>
+									<header><Label text="MAX Bin Qty (EA)"/></header>
+								</Column>
+								<Column>
+									<header><Label text="EA/PAC"/></header>
+								</Column>
+							</columns>
+						</Table>
+					</HBox>
+					<HBox width="100%" id="tableContentHBox" visible="false">
+						<ScrollContainer vertical="true" height="700px">
+							<Table noDataText="No Data" id="ContentTable" items="{ZREPLENISHMENT>/REHeaderSet}" mode="SingleSelectMaster" selectionChange="changeSelectedLine" class="tableItems">
+								<columns>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+									<Column><Label/></Column>
+								</columns>
+								<items>
+									<ColumnListItem id="__item1" type="Active">
+										<cells>
+											<Text text="{ZREPLENISHMENT>Ean}"/>
+											<Text text="{ZREPLENISHMENT>Makt}"/>
+											<Text text="{= ${ZREPLENISHMENT>Vrkme} !== '' ? ${ZREPLENISHMENT>Vrkme} : ${ZREPLENISHMENT>Meins}}"/>
+											<Text text="{ZREPLENISHMENT>QtyOd}"/>
+											<Text text="{ZREPLENISHMENT>QtyTo}"/>
+											<Text text="{ZREPLENISHMENT>QtyDelta}"/>
+											<Text text="{ZREPLENISHMENT>Priority}"/>
+											<Text text="{ZREPLENISHMENT>QtyPicking}"/>
+											<Text text="{ZREPLENISHMENT>StkPicking}"/>
+											<Text text="{ZREPLENISHMENT>PickStkCoverage}"/>
+											<Text text="{ZREPLENISHMENT>StockPas}"/>
+											<Text text="{ZREPLENISHMENT>StockMax}"/>
+											<Text text="{ZREPLENISHMENT>Umrez}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</ScrollContainer>
+					</HBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

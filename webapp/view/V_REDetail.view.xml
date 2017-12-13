@@ -1,0 +1,98 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="DI_Warehouse_Replenishment.controller.V_REDetail">
+	<App>
+		<pages>
+			<Page title="DI Warehouse Replenishment" showNavButton="true" navButtonPress="onBack">
+				<HBox class="sapUiTinyMarginTop">
+					<Button text="Change Unit" type="Emphasized" press="changeUnit"/>
+				</HBox>
+				<HBox class="sapUiTinyMarginTop">
+					<VBox width="10%">
+						<Label text="EAN" design="Bold"/>
+						<Label text="Priority" design="Bold"/>
+						<Label text="Sales Unit" design="Bold"/>
+						<Label text="Max Qty Bin" design="Bold"/>
+						<Label/>
+						<Label id="frombintext" text="From Bins" design="Bold"/>
+					</VBox>
+					<VBox width="40%" id="vboxEan">
+						<Label id="Ean" text="{ZREPLENISHMENT>Ean}"/>
+						<Label id="Priority" text="{ZREPLENISHMENT>Priority}"/>
+						<Label id="Vrkme" text="{ZREPLENISHMENT>Vrkme}"/>
+						<Label id="StockMax"/>
+						<Label/>
+						<List id="fromBinList" showNoData="false"/>
+					</VBox>
+					<VBox width="10%">
+						<Label text="Description" design="Bold"/>
+						<Label text="Replen. Qty" design="Bold"/>
+						<Label text="Display Unit" design="Bold"/>
+						<Label text="Storage Type" design="Bold"/>
+						<Label/>
+						<Label id="tobintext" text="To Bins" design="Bold"/>
+					</VBox>
+					<VBox width="30%">
+						<Label id="Makt" text="{ZREPLENISHMENT>Makt}"/>
+						<Label id="QtyOD"/>
+						<Label id="DisUnit" text="{= ${ZREPLENISHMENT>Vrkme} !== '' ? ${ZREPLENISHMENT>Vrkme} : ${ZREPLENISHMENT>Meins}}" design="Bold"/>
+						<Label id="Lgtkz" text="{ZREPLENISHMENT>Lgtkz}"/>
+						<Label/>
+						<List id="toBinList" showNoData="false"/>
+						<Select id="NoToBinSelect" change="NoToBinChange" visible="false" forceSelection="false"/>
+					</VBox>
+					<VBox width="5%">
+						<Label/>
+						<Label text="EA/PAC" design="Bold"/>
+					</VBox>
+					<VBox width="5%">
+						<Label/>
+						<Label id="altme" text="{ZREPLENISHMENT>Umrez}"/>
+					</VBox>
+				</HBox>
+				<HBox id="initialhbox" alignItems="Center" class="sapUiTinyMarginTop">
+					<Label text="From Bin :" design="Bold"/>
+					<SearchField width="100%" id="searchBin" placeholder="Scan a bin" search="searchBin"/>
+					<Label design="Bold" class="sapUiLargeMarginBegin" id="eanLabel"/>
+					<SearchField width="100%" id="searchEan" placeholder="Scan an EAN" search="searchEan" visible="false"/>
+					<Label id="qtyLabel" design="Bold" class="sapUiLargeMarginBegin"/>
+					<Label id="qtyTO"/>
+				</HBox>
+				<HBox alignItems="Center" class="sapUiTinyMarginTop" id="destbinBox" visible="false">
+					<Label text="Dest Bin :" design="Bold"/>
+					<Label id="destBinLabel" class="sapUiLargeMediumBegin"/>
+				</HBox>
+				<HBox alignItems="Center" class="sapUiTinyMarginTop" id="confirmbinBox" visible="false">
+					<Label text="Confirm Bin :" design="Bold"/>
+					<SearchField width="100%" id="ConfirmBin" placeholder="Confirm a bin" search="confirmBin"/>
+					<Label text="Qty : " design="Bold" class="sapUiLargeMarginBegin"/>
+					<SearchField width="100%" id="searchQty" placeholder="Enter a Qty" search="searchQty" liveChange="qtyPress" enabled="false"/>
+					<Label id="deltaText" design="Bold" class="sapUiLargeMarginBegin"/>
+					<Label id="deltaQty"/>
+				</HBox>
+				<HBox id="returnBinBox" visible="false" alignItems="Center">
+					<Label text="Origin Bin :" design="Bold"/>
+					<SearchField width="100%" id="ReturnBin" enabled="false"/>
+					<Label text="Return Bin :" design="Bold"/>
+					<SearchField width="100%" id="DestBin" placeholder="Return a bin" search="returnBin"/>
+					<Label text="Qty : " design="Bold" class="sapUiLargeMarginBegin"/>
+					<SearchField width="100%" id="searchReturnQty" placeholder="Enter a Qty" search="searchReturnQty" liveChange="qtyPress" enabled="false"/>
+				</HBox>
+				<HBox id="destBinBox" visible="false" alignItems="Center">
+					<Label text="Dest Bin :" design="Bold"/>
+					<Select id="destBinSelect" change="SelectDestBin" visible="false" forceSelection="false"/>
+					<SearchField width="100%" id="destBin" enabled="false"/>
+					<Label text="Confirm Bin :" design="Bold"/>
+					<SearchField width="100%" id="confirmdestBin" placeholder="Confirm a bin" search="confirmdestBin"/>
+					<Label text="Qty : " design="Bold" class="sapUiLargeMarginBegin"/>
+					<SearchField width="100%" id="searchdestQty" placeholder="Enter a Qty" search="searchdestQty" liveChange="qtyPress" enabled="false"/>
+				</HBox>
+				<HBox class="sapUiTinyMarginTop">
+					<Button text="Bin Empty" id="btnEmpty" class="sapUiLargeMarginBegin" type="Emphasized" visible="false" press="emptybin"/>
+					<Button text="Next Bin" id="btnNext" class="sapUiLargeMarginBegin" type="Emphasized" visible="false" press="nextbin"/>
+					<Button text="Return Bin" id="btnReturn" class="sapUiLargeMarginBegin" type="Emphasized" visible="false" press="returnbin"/>
+					<Button text="Pallet Empty" id="btnPalletEmpty" class="sapUiLargeMarginBegin" type="Emphasized" visible="false" press="emptyPalletbin"/>
+				</HBox>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

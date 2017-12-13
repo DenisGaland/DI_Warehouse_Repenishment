@@ -1,0 +1,26 @@
+.bold {
+    font-weight: bold !important;
+}
+
+.tableItems th {
+    padding: 0;
+    height: 0rem;
+    background: rgba(229, 229, 229, 0);
+    border-bottom: 0px solid #cdcdcd;
+}
+
+.ButtonDivider{
+      margin-right: 40px;
+}
+
+.green {
+    background-color: #00ff00 !important;
+}
+
+.orange {
+    background-color: #ffa500 !important;
+}
+
+.red {
+    background-color: #ff0000 !important;
+}
