@@ -34,8 +34,8 @@ sap.ui.define([
 				o.Lgtkz = "PAP";
 			}
 			this.scannedEAN = o.Ean;
-			//var qtyod = parseInt(o.QtyDelta);
-			var qtyod = parseInt(o.QtyOd) - parseInt(o.StkPicking);
+			var qtyod = parseInt(o.QtyDelta);
+			//var qtyod = parseInt(o.QtyOd) - parseInt(o.StkPicking);
 			var stockmax = parseInt(o.StockMax);
 			if (o.Vrkme !== "EA" && o.Umrez !== "0") {
 				qtyod = qtyod / o.Umrez;
@@ -70,8 +70,63 @@ sap.ui.define([
 			var config = this.getOwnerComponent().getManifest();
 			var sServiceUrl = config["sap.app"].dataSources.ZFGREPLENISHMENT_SRV.uri;
 			var oData = new sap.ui.model.odata.ODataModel(sServiceUrl, true);
-			var query = "/REHeaderSet('" + oView.byId("Ean").getText() + "')/REHeaderToBinNav";
-			oData.read(query, null, null, true, function(response) {
+			var query = "/REHeaderSet('" + o.Ean + "')/REHeaderToBinNav";
+			var oFilter = new Filter("Lgtyp", FilterOperator.EQ, o.Lgtkz);
+			oData.read(query, {
+				filters: [oFilter],
+				success: function(response) {
+					if (response.results.length > 0) {
+						oView.byId("toBinList").bindItems({
+							path: "ZBINS>/REHeaderSet('" + o.Ean + "')/REHeaderToBinNav",
+							filters: new Filter({
+								path: "Lgtyp",
+								operator: FilterOperator.EQ,
+								value1: o.Lgtkz
+							}),
+							and: true,
+							template: new sap.m.CustomListItem({
+								content: [
+									new sap.m.Text({
+										text: "{ZBINS>Tobin}",
+										width: "50%"
+									}),
+									new sap.m.Text({
+										text: "{ZBINS>Amount}",
+										width: "50%",
+										textAlign: "Right"
+									})
+								]
+							})
+						});
+						jQuery.sap.delayedCall(1000, this, function() {
+							oView.byId("searchBin").focus();
+						});
+					} else {
+						oView.byId("initialhbox").setVisible(false);
+						oView.byId("toBinList").setVisible(false);
+						oView.byId("NoToBinSelect").setVisible(true);
+						oView.byId("NoToBinSelect").bindItems({
+							path: "ZBINS>/DestBinSet",
+							filters: new Filter({
+								path: "Lgtkz",
+								operator: FilterOperator.EQ,
+								value1: o.Lgtkz
+							}),
+							and: true,
+							template: new sap.ui.core.Item({
+								key: "{ZBINS>Lgpla}",
+								text: "{ZBINS>Lgpla}"
+							})
+						});
+					}
+				},
+				error: function(error) {
+					MessageBox.error(JSON.parse(error.response.body).error.message.value, {
+						title: "Error"
+					});
+				}
+			});
+			/*oData.read(query, null, null, true, function(response) {
 				if (response.results.length > 0) {
 					oView.byId("toBinList").bindItems({
 						path: "ZBINS>/REHeaderSet('" + o.Ean + "')/REHeaderToBinNav",
@@ -120,7 +175,7 @@ sap.ui.define([
 				MessageBox.error(JSON.parse(error.response.body).error.message.value, {
 					title: "Error"
 				});
-			});
+			});*/
 		},
 
 		NoToBinChange: function(evt) {
