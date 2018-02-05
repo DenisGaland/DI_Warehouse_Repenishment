@@ -41,16 +41,16 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			oTable.attachUpdateFinished(function() {
 				this.getItems().forEach(function(row) {
 					var obj = row.getBindingContext("ZREPLENISHMENT").getObject();
-					row.getCells()[6].removeStyleClass("green");
-					row.getCells()[6].removeStyleClass("orange");
-					row.getCells()[6].removeStyleClass("red");
+					row.getCells()[7].removeStyleClass("green");
+					row.getCells()[7].removeStyleClass("orange");
+					row.getCells()[7].removeStyleClass("red");
 					if (obj.Priority === 1) {
-						row.getCells()[6].addStyleClass("green");
+						row.getCells()[7].addStyleClass("green");
 						//row.addStyleClass("highlightStyle");
 					} else if (obj.Priority === 2) {
-						row.getCells()[6].addStyleClass("orange");
+						row.getCells()[7].addStyleClass("orange");
 					} else {
-						row.getCells()[6].addStyleClass("red");
+						row.getCells()[7].addStyleClass("red");
 					}
 				});
 			}.bind(oTable));

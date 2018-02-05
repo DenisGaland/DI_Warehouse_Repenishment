@@ -41,43 +41,46 @@
 						<Table showNoData="false">
 							<columns>
 								<Column>
-									<header><Label text="Ean (EA)" id="__label2"/></header>
+									<Label text="Ean (EA)" id="__label2"/>
 								</Column>
 								<Column>
-									<header><Label text="Description"/></header>
+									<Label text="Matnr"/>
 								</Column>
 								<Column>
-									<header><Label text="Sales Unit"/></header>
+									<Label text="Description"/>
 								</Column>
 								<Column>
-									<header><Label text="Qty OD EA"/></header>
+									<Label text="Sales Unit"/>
 								</Column>
 								<Column>
-									<header><Label text="Qty TO EA"/></header>
+									<Label text="Qty OD EA"/>
 								</Column>
 								<Column>
-									<header><Label text="Delta (EA)"/></header>
+									<Label text="Qty TO EA"/>
 								</Column>
 								<Column>
-									<header><Label text="Priority"/></header>
+									<Label text="Delta (EA)"/>
 								</Column>
 								<Column>
-									<header><Label text="Qty Picked (EA)"/></header>
+									<Label text="Priority"/>
 								</Column>
 								<Column>
-									<header><Label text="Stock Picking (EA)"/></header>
+									<Label text="Qty Picked (EA)"/>
 								</Column>
 								<Column>
-									<header><Label text="Picking Stock Coverage"/></header>
+									<Label text="Stock Picking (EA)"/>
 								</Column>
 								<Column>
-									<header><Label text="Stock PAS (EA)"/></header>
+									<Label text="Picking Stock Coverage"/>
+								</Column>
+								<Column>
+									<Label text="Stock PAS (EA)"/>
 								</Column>
 								<Column>
 									<header><Label text="MAX Bin Qty (EA)"/></header>
 								</Column>
 								<Column>
-									<header><Label text="EA/PAC"/></header>
+									<Label text="EA/PAC"/>
 								</Column>
 							</columns>
 						</Table>
@@ -99,11 +102,13 @@
 									<Column><Label/></Column>
 									<Column><Label/></Column>
 									<Column><Label/></Column>
+									<Column><Label/></Column>
 								</columns>
 								<items>
 									<ColumnListItem id="__item1" type="Active">
 										<cells>
 											<Text text="{ZREPLENISHMENT>Ean}"/>
+											<Text text="{ZREPLENISHMENT>Matnr}"/>
 											<Text text="{ZREPLENISHMENT>Makt}"/>
 											<Text text="{= ${ZREPLENISHMENT>Vrkme} !== '' ? ${ZREPLENISHMENT>Vrkme} : ${ZREPLENISHMENT>Meins}}"/>
 											<Text text="{ZREPLENISHMENT>QtyOd}"/>

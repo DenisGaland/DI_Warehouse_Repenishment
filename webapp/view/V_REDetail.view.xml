@@ -8,7 +8,7 @@
 				</HBox>
 				<HBox class="sapUiTinyMarginTop">
 					<VBox width="10%">
-						<Label text="EAN" design="Bold"/>
+						<Label text="EAN/Matnr" design="Bold"/>
 						<Label text="Priority" design="Bold"/>
 						<Label text="Sales Unit" design="Bold"/>
 						<Label text="Max Qty Bin" design="Bold"/>
@@ -16,7 +16,7 @@
 						<Label id="frombintext" text="From Bins" design="Bold"/>
 					</VBox>
 					<VBox width="40%" id="vboxEan">
-						<Label id="Ean" text="{ZREPLENISHMENT>Ean}"/>
+						<Label id="Ean" text="{ZREPLENISHMENT>Ean}/{ZREPLENISHMENT>Matnr}"/>
 						<Label id="Priority" text="{ZREPLENISHMENT>Priority}"/>
 						<Label id="Vrkme" text="{ZREPLENISHMENT>Vrkme}"/>
 						<Label id="StockMax"/>

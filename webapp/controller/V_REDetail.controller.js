@@ -30,6 +30,12 @@ sap.ui.define([
 				model: "ZREPLENISHMENT"
 			});
 			var o = this.getView().getBindingContext("ZREPLENISHMENT").getObject();
+			var param;
+			if (o.Lgtkz === 'PAH'){
+				param = o.Ean;
+			} else {
+				param = o.Lgtkz;
+			}
 			if (o.Lgtkz === "PAL") {
 				o.Lgtkz = "PAP";
 			}
@@ -110,7 +116,8 @@ sap.ui.define([
 							filters: new Filter({
 								path: "Lgtkz",
 								operator: FilterOperator.EQ,
-								value1: o.Lgtkz
+								//value1: o.Lgtkz
+								value1: param
 							}),
 							and: true,
 							template: new sap.ui.core.Item({
@@ -325,7 +332,9 @@ sap.ui.define([
 			var config = this.getOwnerComponent().getManifest();
 			var sServiceUrl = config["sap.app"].dataSources.ZFGREPLENISHMENT_SRV.uri;
 			var oData = new sap.ui.model.odata.ODataModel(sServiceUrl, true);
-			var query = "/BinCheckSet(Bin='" + bin + "',Ean='" + oView.byId("Ean").getText() + "',Meins='" + oView.byId("DisUnit").getText() +
+			//var query = "/BinCheckSet(Bin='" + bin + "',Ean='" + oView.byId("Ean").getText() + "',Meins='" + oView.byId("DisUnit").getText() +
+			//	"')";
+			var query = "/BinCheckSet(Bin='" + bin + "',Ean='" + oView.getBindingContext("ZREPLENISHMENT").getObject().Ean + "',Meins='" + oView.byId("DisUnit").getText() +
 				"')";
 			oData.read(query, null, null, true, function(response) {
 				if (response.Message === "OK") {
